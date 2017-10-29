@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito|Oxygen');
+@import "ColorScheme";
 
 h1 {
-  background-color: #2A2A34;
+  background-color: $secondaryColor;
   font-family: 'Nunito', sans-serif;
-  color: #A0A0A5;
+  color: $highlightGrey;
   text-transform: uppercase;
   font-size: 1.2em;
   padding: 20px;
@@ -12,9 +13,9 @@ h1 {
 .taskBox {
   width: 350px;
   margin: 0 auto;
-  background-color: #F04C49;
+  background-color: $primaryColor;
   font-family: 'Oxygen', sans-serif;
-  color: #fff;
+  color: white;
 }
 
 ul {
@@ -37,22 +38,22 @@ ul {
 .addMoreItems {
   width: 90px;
   padding: 20px;
-  background-color: #A23F41;
+  background-color: darken($primaryColor, 25%);
 
   &:hover {
-    background-color: #A0A0A5;
+    background-color: $highlightGrey;
     transition: all .3s linear;
   }
 
   &:after {
-    background-color: #fff;
+    background-color: white;
   }
 }
 
 /*this one is not working*/
 
 .completed {
-  background-color: #2A2A34;
+  background-color: $secondaryColor;
   font-size: 1em;
   width: 100px;
   padding: 20px;
