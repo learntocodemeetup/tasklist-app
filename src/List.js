@@ -1,26 +1,30 @@
 import React, {Component} from 'react';
 import './List.css';
 
+let id = 0;
+
+
 class List extends Component {
     state = {
         items: [
             {
-                id: 0,
-                text: "Make a task list app in React",
+                id: id++,
+                text: "Have lunch",
                 active: true
             },
             {
-                id: 1,
-                text: "Do beach yoga",
+                id: id++,
+                text: "Get dinner",
                 active: true
             },
             {
-                id: 2,
-                text: "Purchase drinks for the gang",
+                id: id++,
+                text: "Sleep",
                 active: true
             }
         ],
         showCompleted: false
+
     };
 
     clickHandler = (id) => {
@@ -34,8 +38,8 @@ class List extends Component {
                     return item;
                 }
             })
-        });
-        console.log(this.state.items)
+        })
+
     };
 
     onCompletedClick = () => {
@@ -44,46 +48,97 @@ class List extends Component {
         })
     };
 
+
     showCompleted = () => {
+
         return this.state.items.filter((item) => {
-                console.log(item);
-                return item.active === false;
-            }
-        ).map((item) => {
-            return <span style={{textDecoration: 'line-through'}}>
-                    <li onClick={this.clickHandler.bind(this, item.id)} key={item.id}>{item.text}</li>
-                </span>
+            console.log(item);
+            return item.active === false;
         })
+            .map((item) => {
+                return (
+                    <strike>
+                        <li
+                            onClick={this.clickHandler.bind(this, item.id)}
+                            key={item.id}
+                        >
+                            {item.text}
+                        </li>
+                    </strike>
+                )
+            })
+
     };
 
     showActive = () => {
+
         return this.state.items.filter((item) => {
             console.log(item);
             return item.active === true;
-        }).map((item) => {
-            return <li onClick={this.clickHandler.bind(this, item.id)} key={item.id}>{item.text}</li>
+        })
+            .map((item) => {
+                return (
+                    <li
+                        onClick={this.clickHandler.bind(this, item.id)}
+                        key={item.id}
+                    >
+                        {item.text}
+                    </li>
+                );
+            })
+
+    };
+
+    submitHandler = (e) => {
+        e.preventDefault();
+        console.dir(this.input.value);
+
+        const newItem = {
+            id: id++,
+            text: this.input.value,
+            active: true
+        };
+
+
+        this.setState({
+            items: [...this.state.items, newItem]
         })
     };
 
 
     render() {
-        let todos = this.state.showCompleted ? this.showCompleted() : "";
+        let todos;
 
-        let completedItems = this.state.items.filter((item) => {
+        const completedItems = this.state.items.filter((item) => {
             return !item.active
         }).length;
 
+
+        if (this.state.showCompleted) {
+            todos = this.showCompleted();
+        } else {
+            todos = "";
+        }
         return (
+
             <div className="taskBox">
                 <h1>Task List</h1>
-                <input type="text" className="textInput"/>
-                <ul> {this.showActive()}</ul>
-                <div className="addMoreItems">+ New Item</div>
-                <p className="completed"
-                   onClick={this.onCompletedClick}>
+                <form onSubmit={this.submitHandler}>
+                    <input type="text" ref={(input) => this.input = input}/>
+                </form>
+                <ul>
+                    {this.showActive()}
+                </ul>
+
+                <p
+                    className="completed"
+                    onClick={this.onCompletedClick}
+                >
                     Completed({completedItems})
                 </p>
-                <ul> {todos} </ul>
+                <ul>
+                    {todos}
+                </ul>
             </div>
 
         );
