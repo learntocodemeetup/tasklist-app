@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito|Oxygen');
-@import "ColorScheme";
+@import "ColorScheme.scss";
 
 h1 {
   background-color: $secondaryColor;
@@ -8,6 +8,10 @@ h1 {
   text-transform: uppercase;
   font-size: 1.2em;
   padding: 20px;
+}
+
+.textInput {
+  margin: 0.25rem;
 }
 
 .taskBox {
@@ -20,17 +24,26 @@ h1 {
 
 ul {
   list-style-type: none;
+  padding-left: 0;
 
   li {
-    padding: 15px 15px 15px 0;
+    cursor: pointer;
+    vertical-align: middle;
+    padding: 0.5rem;
+
+    &:hover {
+      background-color: darken($primaryColor, 25%);
+    }
 
     &:before {
+      vertical-align: middle;
       content: '';
       width: 20px;
       height: 20px;
       border-radius: 100%;
       border: 1px solid white;
       display: inline-block;
+      margin-right: 0.5rem;
     }
   }
 }

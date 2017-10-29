@@ -76,7 +76,7 @@ class List extends Component {
         return (
             <div className="taskBox">
                 <h1>Task List</h1>
-                <input type="text"/>
+                <input type="text" className="textInput"/>
                 <ul> {this.showActive()}</ul>
                 <div className="addMoreItems">+ New Item</div>
                 <p className="completed"
